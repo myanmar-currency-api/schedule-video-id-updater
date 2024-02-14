@@ -30,16 +30,16 @@ def push_youtube_meta_to_github():
     # Get the repository
     repo = g.get_user(repo_owner).get_repo(repo_name)
 
-# Create or update file
-try:
-    contents = repo.get_contents(file_path)
-    print(contents.sha)
-    repo.update_file(file_path, "Update file", file_content, contents.sha)
-    print(f"File '{file_path}' updated successfully.")
-except Exception as e:
-    repo.create_file(file_path, "Create file", file_content)
-    print(f"File '{file_path}' created successfully.")
-    pass
+    # Create or update file
+    try:
+        contents = repo.get_contents(file_path)
+        print(contents.sha)
+        repo.update_file(file_path, "Update file", file_content, contents.sha)
+        print(f"File '{file_path}' updated successfully.")
+    except Exception as e:
+        repo.create_file(file_path, "Create file", file_content)
+        print(f"File '{file_path}' created successfully.")
+        pass
 
 def fetch_youtube_video_id():
     api_key = os.getenv("YOU_TUBE_API_KEY")
