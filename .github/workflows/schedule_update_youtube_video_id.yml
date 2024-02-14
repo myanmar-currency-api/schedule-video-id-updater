@@ -4,6 +4,20 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: "0 04 * * 1-5"
+    - cron: "15 04 * * 1-5"
+    - cron: "30 04 * * 1-5"
+    - cron: "45 04 * * 1-5"
+    - cron: "0 05 * * 1-5"
+    - cron: "15 05 * * 1-5"
+    - cron: "30 05 * * 1-5"
+    - cron: "45 05 * * 1-5"
+    - cron: "00 13 * * 1-5"
+    - cron: "15 13 * * 1-5"
+    - cron: "30 13 * * 1-5"
+    - cron: "45 13 * * 1-5"
+    - cron: "00 14 * * 1-5"
 
 jobs:
   run-script:
@@ -13,22 +27,22 @@ jobs:
       YOU_TUBE_API_KEY: ${{secrets.YOU_TUBE_API_KEY}}
       GH_ACCESS_TOKEN: ${{secrets.GH_ACCESS_TOKEN}}
     steps:
-      - name: Verify environment
-        run: |
-          echo "Environment variable YOU_TUBE_API_KEY: $YOU_TUBE_API_KEY "
-          echo "Environment variable GH_ACCESS_TOKEN: $GH_ACCESS_TOKEN"
       - name: Checkout code
+        if: contains(fromJSON('["0 04 * * 1-5", "15 04 * * 1-5","30 04 * * 1-5","45 04 * * 1-5","0 05 * * 1-5","15 05 * * 1-5","30 05 * * 1-5","45 05 * * 1-5","00 13 * * 1-5","30 13 * * 1-5","45 13 * * 1-5","00 14 * * 1-5"]'), github.event.schedule)
         uses: actions/checkout@v2
 
       - name: Set up Python
+        if: contains(fromJSON('["0 04 * * 1-5", "15 04 * * 1-5","30 04 * * 1-5","45 04 * * 1-5","0 05 * * 1-5","15 05 * * 1-5","30 05 * * 1-5","45 05 * * 1-5","00 13 * * 1-5","30 13 * * 1-5","45 13 * * 1-5","00 14 * * 1-5"]'), github.event.schedule)
         uses: actions/setup-python@v2
         with:
           python-version: 3.x
 
       - name: Install dependencies
+        if: contains(fromJSON('["0 04 * * 1-5", "15 04 * * 1-5","30 04 * * 1-5","45 04 * * 1-5","0 05 * * 1-5","15 05 * * 1-5","30 05 * * 1-5","45 05 * * 1-5","00 13 * * 1-5","30 13 * * 1-5","45 13 * * 1-5","00 14 * * 1-5"]'), github.event.schedule)
         run: pip install -r requirements.txt
 
       - name: Run script to update video_meta.json to scraper
+        if: contains(fromJSON('["0 04 * * 1-5", "15 04 * * 1-5","30 04 * * 1-5","45 04 * * 1-5","0 05 * * 1-5","15 05 * * 1-5","30 05 * * 1-5","45 05 * * 1-5","00 13 * * 1-5","30 13 * * 1-5","45 13 * * 1-5","00 14 * * 1-5"]'), github.event.schedule)
         run: |
           # Add your script execution command here
           python main.py
