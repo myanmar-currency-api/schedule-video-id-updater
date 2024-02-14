@@ -75,3 +75,4 @@ def main():
     fetch_youtube_video_id()
     push_youtube_meta_to_github()
 
+main()
