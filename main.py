@@ -61,8 +61,7 @@ def fetch_youtube_video_id():
         channelId=channel_id,
         q=video_name,
         order='date',  # Filter by recently uploaded
-        type='video',
-        publishedAfter = time_stamp
+        type='video'
     ).execute()
 
     search_result = search_response.get('items',[])[0]
