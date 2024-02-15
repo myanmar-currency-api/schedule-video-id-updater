@@ -2,6 +2,7 @@ import os
 import json
 from googleapiclient.discovery import build
 from github import Github
+from datetime import datetime
 
 def push_youtube_meta_to_github():
 # Define GitHub repository details
@@ -52,13 +53,16 @@ def fetch_youtube_video_id():
 
     youtube = build('youtube', 'v3', developerKey=api_key)
 
+    time_stamp = datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ')
+
     # Call the search.list method to search for videos
     search_response = youtube.search().list(
         part='snippet',
         channelId=channel_id,
         q=video_name,
         order='date',  # Filter by recently uploaded
-        type='video'
+        type='video',
+        publishedAfter = time_stamp
     ).execute()
 
     search_result = search_response.get('items',[])[0]
