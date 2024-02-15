@@ -65,7 +65,8 @@ def fetch_youtube_video_id():
     video_meta = {
         "video_title":search_result["snippet"]["title"],
         "video_id":search_result["id"]["videoId"]}
-    print()
+    
+    print(video_meta)
 
     with open('video_meta.json', 'w') as json_file:
         json.dump(video_meta, json_file, indent=4)
